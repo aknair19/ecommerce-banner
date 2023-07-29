@@ -21,7 +21,7 @@ const SearchList = () => {
           placeholder="Search for products"
         />
         <button className="bg-orange-400 p-1 px-3 rounded-tr rounded-br">
-          <BsSearch />
+          <BsSearch className="text-white font-bold" />
         </button>
       </div>
 
@@ -34,11 +34,11 @@ const SearchList = () => {
       <div className="text-white flex gap-4 items-center text-sm">
         <div className="flex items-center gap-1 font-semibold">
           <BsFillCartDashFill />
-          <p>Cart</p>
+          <p>CART</p>
         </div>
         <div className="flex items-center gap-1 font-semibold text-sm">
           <BiSolidUser />
-          <p>User</p>
+          <p>USER</p>
         </div>
       </div>
     </div>
