@@ -5,7 +5,7 @@ import HeroSection from "./HeroSection";
 
 const Navbar = () => {
   return (
-    <nav className="w-full bg-yellow-400 h-[500px]  flex flex-col items-center gap-4">
+    <nav className="w-full bg-yellow-400 h-[500px]  flex flex-col items-center gap-4 rounded-bl-[50px] rounded-br-[50px]">
       <Navlist />
       <h2 className="text-2xl font-bold text-white">Eflyer</h2>
       <SearchList />
