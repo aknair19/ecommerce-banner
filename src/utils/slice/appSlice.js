@@ -7,6 +7,7 @@ const appSlice = createSlice({
     searchProducts: [],
     searchInput: "",
     category: "",
+    itemsInCart: [],
   },
   reducers: {
     getProducts: (state, action) => {
@@ -21,9 +22,17 @@ const appSlice = createSlice({
     getCategory: (state, action) => {
       state.category = action.payload;
     },
+    addItems: (state, action) => {
+      state.itemsInCart.push(action.payload);
+    },
   },
 });
 
-export const { getProducts, getProductsOnSearch, getSearchInput, getCategory } =
-  appSlice.actions;
+export const {
+  getProducts,
+  getProductsOnSearch,
+  getSearchInput,
+  addItems,
+  getCategory,
+} = appSlice.actions;
 export default appSlice.reducer;

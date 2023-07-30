@@ -8,7 +8,7 @@ import axios from "axios";
 import { getCategoryNames } from "../constants";
 const SearchList = () => {
   const [categories, setCategories] = useState([]);
-
+const itemsInCart=useSelector(store=>store.app.itemsInCart)
   const dispatch = useDispatch();
   const searchInputValue = useSelector((state) => state.app.searchInput);
 
@@ -55,16 +55,18 @@ const SearchList = () => {
       </div>
 
       <select className=" text-xs p-1 w-20 rounded-sm">
-        <option value="All Category">English</option>
-        <option value="Clothes">German</option>
-        <option value="Electronics">Espanyol</option>
-        <option value="Furniture">French</option>
+        <option>English</option>
+        <option>German</option>
+        <option>Espanyol</option>
+        <option>French</option>
       </select>
       <div className="text-white flex gap-4 items-center text-sm">
-        <div className="cursor-pointer flex items-center gap-1 font-semibold hover:text-gray-200 ">
+        <div className="  cursor-pointer flex items-center gap-1 font-semibold hover:text-gray-200 relative ">
           <BsFillCartDashFill />
-          <p>CART</p>
+          <p className="">CART</p>
+          <div className="text-xs text-red-400 font-bold absolute left-3 top-[-9px]">{itemsInCart.length}</div>
         </div>
+
         <div className=" cursor-pointer flex items-center gap-1 font-semibold text-sm hover:text-gray-200">
           <BiSolidUser />
           <p>USER</p>
