@@ -4,7 +4,7 @@ import { BsSearch, BsFillCartDashFill } from "react-icons/bs";
 import { BiSolidUser } from "react-icons/bi";
 const SearchList = () => {
   return (
-    <div className="flex w-5/6 max-w-[1400px] justify-between items-center gap-4">
+    <div className="flex w-5/6 max-w-[1400px] justify-between items-center gap-4 outline-none">
       <GiHamburgerMenu className="text-white text-3xl  cursor-pointer " />
       <select className="bg-black text-white text-xs p-1 w-26">
         <option value="All Category">All Category</option>
