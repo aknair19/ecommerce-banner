@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { allProducts } from "../constants";
+import { allProducts, productsByCategory } from "../constants";
 import {
   getProducts,
   getProductsOnSearch,
@@ -13,6 +13,8 @@ const CardList = () => {
   const products = useSelector((store) => store.app.products);
   const inputValue = useSelector((store) => store.app.searchInput);
   const searchProducts = useSelector((store) => store.app.searchProducts);
+  const selectedCategory = useSelector((store) => store.app.category);
+  const [category, setCategory] = useState([]);
   const getAllProducts = async () => {
     try {
       const { data } = await axios.get(allProducts);
@@ -27,9 +29,25 @@ const CardList = () => {
       product?.title.toLowerCase().includes(inputValue)
     );
     dispatch(getProductsOnSearch(data));
-    console.log(data);
   };
 
+  const getProductByCategory = async () => {
+    try {
+      if (selectedCategory !== "all category") {
+        const { data } = await axios.get(
+          productsByCategory + `/${selectedCategory}`
+        );
+        setCategory(data);
+        
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllProducts();
+  }, []);
   useEffect(() => {
     const timer = setTimeout(() => {
       getProductsBySearch();
@@ -41,9 +59,10 @@ const CardList = () => {
   }, [inputValue]);
 
   useEffect(() => {
-    getAllProducts();
-  }, []);
-  return inputValue === "" ? (
+    getProductByCategory();
+  }, [selectedCategory]);
+
+  return inputValue === "" && selectedCategory === "" ? (
     <div className=" flex flex-wrap w-5/6 gap-4  ">
       {products.map((product) => (
         <Card product={product} key={product?.id} />
@@ -52,6 +71,12 @@ const CardList = () => {
   ) : searchProducts.length > 0 ? (
     <div className=" flex flex-wrap w-5/6 gap-4  ">
       {searchProducts.map((product) => (
+        <Card product={product} key={product?.id} />
+      ))}
+    </div>
+  ) : category.length > 0 ? (
+    <div className=" flex flex-wrap w-5/6 gap-4  ">
+      {category.map((product) => (
         <Card product={product} key={product?.id} />
       ))}
     </div>

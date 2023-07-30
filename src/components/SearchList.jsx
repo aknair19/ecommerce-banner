@@ -1,25 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsSearch, BsFillCartDashFill } from "react-icons/bs";
 import { BiSolidUser } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { getSearchInput } from "../utils/slice/appSlice";
+import { getCategory, getSearchInput } from "../utils/slice/appSlice";
+import axios from "axios";
+import { getCategoryNames } from "../constants";
 const SearchList = () => {
+  const [categories, setCategories] = useState([]);
+
   const dispatch = useDispatch();
   const searchInputValue = useSelector((state) => state.app.searchInput);
 
   const handleInputValue = (e) => {
     dispatch(getSearchInput(e.target.value));
   };
+  const getCategoryList = async () => {
+    const { data } = await axios.get(getCategoryNames);
+    setCategories(["all category", ...data]);
+  };
 
+  useEffect(() => {
+    getCategoryList();
+  }, []);
+  const getCategorySelected = (e) => {
+    dispatch(getCategory(e.target.value));
+  };
   return (
     <div className="flex w-5/6 max-w-[1400px] justify-between items-center gap-4 outline-none">
       <GiHamburgerMenu className="text-white text-3xl  cursor-pointer " />
-      <select className="bg-black text-white rounded-sm text-xs p-1 w-26">
-        <option value="All Category">All Category</option>
-        <option value="Clothes">Clothes</option>
-        <option value="Electronics">Electronics</option>
-        <option value="Furniture">Furniture</option>
+      <select
+        className="bg-black text-white rounded-sm text-xs p-1 w-34"
+        onChange={getCategorySelected}
+      >
+        {categories.map((category, i) => (
+          <option value={category} key={i}>
+            {category.toUpperCase()}
+          </option>
+        ))}
       </select>
 
       <div className="flex-1 flex justify-center max-w-[900px] ">
