@@ -8,7 +8,7 @@ import axios from "axios";
 import { getCategoryNames } from "../constants";
 const SearchList = () => {
   const [categories, setCategories] = useState([]);
-const itemsInCart=useSelector(store=>store.app.itemsInCart)
+  const itemsInCart = useSelector((store) => store.app.itemsInCart);
   const dispatch = useDispatch();
   const searchInputValue = useSelector((state) => state.app.searchInput);
 
@@ -27,8 +27,8 @@ const itemsInCart=useSelector(store=>store.app.itemsInCart)
     dispatch(getCategory(e.target.value));
   };
   return (
-    <div className="flex w-5/6 max-w-[1400px] justify-between items-center gap-4 outline-none">
-      <GiHamburgerMenu className="text-white text-3xl  cursor-pointer " />
+    <div className="flex flex-col md:flex-row  w-5/6 max-w-[1400px] justify-between items-center gap-4 outline-none">
+      <GiHamburgerMenu className="text-white text-3xl  cursor-pointer hidden md:block" />
       <select
         className="bg-black text-white rounded-sm text-xs p-1 w-34"
         onChange={getCategorySelected}
@@ -40,10 +40,10 @@ const itemsInCart=useSelector(store=>store.app.itemsInCart)
         ))}
       </select>
 
-      <div className="flex-1 flex justify-center max-w-[900px] ">
+      <div className="flex-1 flex justify-center  w-full  md:max-w-[900px] ">
         <input
           type="text"
-          className=" w-3/4 text-sm placeholder:text-sm   
+          className="  w-full md:w-3/4 text-sm placeholder:text-sm   
           p-[4px] placeholder:px-2 rounded-tl rounded-bl "
           placeholder="search for products"
           value={searchInputValue}
@@ -62,9 +62,12 @@ const itemsInCart=useSelector(store=>store.app.itemsInCart)
       </select>
       <div className="text-white flex gap-4 items-center text-sm">
         <div className="  cursor-pointer flex items-center gap-1 font-semibold hover:text-gray-200 relative ">
+        <p className="">CART</p>
           <BsFillCartDashFill />
-          <p className="">CART</p>
-          <div className="text-xs text-red-400 font-bold absolute left-3 top-[-9px]">{itemsInCart.length}</div>
+          
+          <div className="text-xs text-red-400 font-bold absolute left-12 top-[-10px]">
+            {itemsInCart.length}
+          </div>
         </div>
 
         <div className=" cursor-pointer flex items-center gap-1 font-semibold text-sm hover:text-gray-200">

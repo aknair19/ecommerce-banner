@@ -25,6 +25,9 @@ const appSlice = createSlice({
     addItems: (state, action) => {
       state.itemsInCart.push(action.payload);
     },
+    clearCart: (state, action) => {
+      state.itemsInCart = [];
+    },
   },
 });
 
@@ -34,5 +37,6 @@ export const {
   getSearchInput,
   addItems,
   getCategory,
+  clearCart
 } = appSlice.actions;
 export default appSlice.reducer;

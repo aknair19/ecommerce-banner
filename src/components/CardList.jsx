@@ -63,7 +63,7 @@ const CardList = () => {
   }, [selectedCategory]);
 
   return inputValue === "" && selectedCategory === "" ? (
-    <div className=" flex flex-wrap w-5/6 gap-4  ">
+    <div className=" flex flex-wrap w-5/6 gap-4 justify-center md:justify-start ">
       {products.map((product) => (
         <Card product={product} key={product?.id} />
       ))}
